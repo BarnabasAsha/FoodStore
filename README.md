@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# Foodstore
+An Ecommerce web application built for a food and grocery store
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
