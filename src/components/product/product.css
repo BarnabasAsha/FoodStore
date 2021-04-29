@@ -1,0 +1,51 @@
+.product-card {
+  width: 240px;
+  height: 300px;
+  background: var(--white-color);
+  box-shadow: 4px 4px 4px var(--grey-color-2);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.product-card_img {
+  width: 200px;
+  height: 162px;
+  border-radius: 10px;
+}
+
+.product-card h4 {
+  margin: 0.8em 0;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.87rem;
+}
+
+.product-card p {
+  font-weight: 600;
+  font-size: 1.38rem;
+  line-height: 2rem;
+}
+
+@media only screen and (max-width: 650px) {
+    .product-card {
+        width: 150px;
+        height: 230px;
+        padding: 15px;
+    }
+
+    .product-card_img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .product-card h4 {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+
+    .product-card p {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+}
+
