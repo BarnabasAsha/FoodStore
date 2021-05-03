@@ -5,6 +5,7 @@
 }
 
 body {
+  position: relative;
   background: var(--grey-color-1);
   font-family: 'Poppins', sans-serif;
 }
@@ -35,6 +36,12 @@ button {
   border: none;
 }
 
+.first-level-heading {
+  font-weight: 600;
+font-size: 2rem;
+line-height: 2rem;
+}
+
 .second-level-heading {
   font-weight: 600;
 font-size: 1.4rem;
@@ -53,7 +60,11 @@ line-height: 2rem;
   height: 50px;
   border-radius: 20px;
   font-weight: 700;
-  color: var(--white-color);
+  cursor: pointer;
+}
+
+.btn.btn_xl {
+  width: 100%;
 }
 
 .btn.btn_large{
@@ -64,7 +75,13 @@ line-height: 2rem;
 }
 .btn.btn_light {
   background-color: var(--primary-color);
+  color: var(--white-color);
 }
 .btn.btn_dark {
   background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+.btn .btn_grey {
+  background-color: var(--grey-color-2);
+  color: #000;
 }
