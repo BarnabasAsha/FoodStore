@@ -74,7 +74,7 @@ const Cart = () => {
                             cartItems.length ? (
                                 <PaystackConsumer {...componentProps} >
                                     {({ initializePayment }) => <button  className="btn btn_large btn_dark" onClick={() => {
-                                        if (currentUser) {
+                                        if (currentUser !== null) {
                                             initializePayment(handleSuccess, handleClose)
                                         } else history.push('/login');
                                     }
