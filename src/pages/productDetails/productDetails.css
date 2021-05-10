@@ -122,7 +122,7 @@
         width: 100%;
         height: auto;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
