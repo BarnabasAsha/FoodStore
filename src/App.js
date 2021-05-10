@@ -103,13 +103,11 @@ function App() {
         <Route
           exact
           path="/admin"
-          render={() => {
-            return (
-              <Layout>
-                <Admin />
-              </Layout>
-            );
-          }}
+          render={() => currentUser.userRoles.include('admin') ? (
+                <Layout>
+                  <Admin />
+                </Layout>
+          ): <Redirect to="/"/> }
         />
         <Route
           path="/login"
