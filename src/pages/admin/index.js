@@ -36,7 +36,7 @@ const Admin = () => {
             ...prdData,
             id: 'prd' + Math.floor(Math.random() * Date.now())
         })
-        dispatch(adminAction.addNewPrd(prdData))
+        dispatch(adminAction.addNewPrd({...prdData, id: 'prd' + Math.floor(Math.random() * Date.now())}))
         updateData(initialValues)
     }
 

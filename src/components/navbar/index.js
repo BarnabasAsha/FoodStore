@@ -23,14 +23,14 @@ const Navbar = () => {
             <a href="/" className="navbar_logo">
                 <img src={logo} alt="Foodstore" />
             </a>
-            <div className="navbar_search">
+            {/* <div className="navbar_search">
                 <input type="text" name="search" placeholder="Search for your foods and groceries" />
-            </div>
+            </div> */}
             <ul className="navbar_ctas">
                 <li onClick={toggleCart}>
                     <button className="btn btn_dark btn_large">
                         <img className="navbar_icon adjust" src={cart} alt="" />
-                        <span className="navbar_ctas_text">CART ({mycartCount})</span> </button>
+                        <span className="navbar_ctas_text"> <span className="txt">CART</span> ({mycartCount})</span> </button>
                 </li>
                 <li>
                     {

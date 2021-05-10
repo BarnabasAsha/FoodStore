@@ -98,6 +98,7 @@
 
 @media only screen and (max-width: 500px) {
   .section_grid {
+    justify-content: center;
     padding: 0;
     /* column-gap: 1em; */
   }

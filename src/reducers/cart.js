@@ -38,6 +38,10 @@ export default function cart(state = initialState, action) {
           ...state,
           status: !state.status
       }
+    case "CLEAR_CART": 
+      return {
+          ...initialState
+      }
       default:
         return state;
     }

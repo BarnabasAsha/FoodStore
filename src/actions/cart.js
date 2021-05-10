@@ -7,5 +7,8 @@ export const cartAction = {
     },
     toggleCart : () => {
         return { type: 'TOGGLE_CART' }
+    },
+    clearCart: () => {
+        return { type: 'CLEAR_CART'}
     }
 }

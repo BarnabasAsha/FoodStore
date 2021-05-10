@@ -64,19 +64,19 @@
       width: 300px;
   }
 
-    .navbar_ctas_text {
+    .navbar_ctas_text .txt {
         display: none;
     }
 
     .navbar_ctas .btn_large {
-        width: 50px !important;
+        width: 80px !important;
     }
 }
 
 @media only screen and (max-width: 650px) {
-    .navbar {
+    /* .navbar {
         margin-bottom: 3em;
-    }
+    } */
   
     .navbar_search {
         position: absolute;
