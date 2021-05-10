@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { productAction } from '../../actions/product'
 import Product from '../../components/product'
@@ -7,13 +7,13 @@ const Farm = () => {
     const dispatch = useDispatch()
     const farmList = useSelector( state => state.product.farm )
 
-    const fetchFarm = () => {
+    const fetchFarm = useCallback(() => {
         dispatch(productAction.fetchFarm())
-    }
+    }, [dispatch])
 
     useEffect(() => {
         fetchFarm()
-    }, [])
+    }, [fetchFarm])
     return (
         <section>
             <header className="section_heading">

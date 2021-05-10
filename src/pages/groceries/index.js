@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { productAction } from '../../actions/product'
 import Product from '../../components/product'
@@ -7,13 +7,13 @@ const Groceries = () => {
     const dispatch = useDispatch()
     const groceriesList = useSelector( state => state.product.groceries)
 
-    const getGroceries = () => {
+    const getGroceries = useCallback(() => {
         dispatch(productAction.fetchGroceries())
-    }
+    }, [dispatch])
 
     useEffect(() => {
         getGroceries()
-    }, [])
+    }, [getGroceries])
 
     return (
         <section>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, useHistory } from 'react-router-dom'
 import useQuery from '../../customHooks/useQuery'
@@ -17,13 +17,13 @@ const ProductDetails = () => {
     const dispatch = useDispatch()
     const product = useSelector(state => state.product.singleProduct)
 
-    const getProduct = () => {
+    const getProduct = useCallback(() => {
         dispatch(productAction.fetchSingle(id))
-    }
+    }, [dispatch, id])
 
     useEffect(() => {
         getProduct()
-    }, [])
+    }, [getProduct])
 
     const addToCart = async () => {
         await dispatch(cartAction.addToCart({...product[0], cartQuantity: quantity}))

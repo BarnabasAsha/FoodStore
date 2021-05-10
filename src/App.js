@@ -40,7 +40,7 @@ function App() {
     return () => {
       authListener()
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="App">

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { productAction } from '../../actions/product'
 import Product from '../../components/product'
@@ -8,14 +8,14 @@ const Home = () => {
     const { groceriesSnapshot, farmSnapshot } = useSelector( state => state.product )
     const dispatch = useDispatch()
 
-    const fetchProducts = async () => {
+    const fetchProducts = useCallback( async () => {
         await dispatch(productAction.fetchGroceriesSnapshot())
         await dispatch(productAction.fetchFarmSnapshot())
-    }
+    }, [dispatch])
 
     useEffect(() => {
         fetchProducts()
-    }, [])
+    }, [fetchProducts])
     
     return (
         <section className="home">
