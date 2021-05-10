@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
+import useQuery from '../../customHooks/useQuery'
 import { productAction } from '../../actions/product'
 import { cartAction } from '../../actions/cart'
 import './productDetails.css'
+import Modal from '../../components/modal'
 
 const ProductDetails = () => {
+    const query = useQuery()
+    const location = useLocation()
+    const history = useHistory()
     const [quantity, setQuantity] = useState(1)
-    const { id } = useParams()
+    const id = query.get('product')
 
     const dispatch = useDispatch()
     const product = useSelector(state => state.product.singleProduct)
@@ -17,17 +22,13 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
-        console.log(id, "Na the id be this 00")
         getProduct()
     }, [])
 
-    const toggleCart = () => {
-        dispatch(cartAction.toggleCart())
-    }
-
     const addToCart = async () => {
-        console.log(12345)
-        await dispatch(cartAction.addToCart({...product, cartQuantity: quantity}))
+        await dispatch(cartAction.addToCart({...product[0], cartQuantity: quantity}))
+        dispatch(cartAction.toggleCart())
+        history.push(location.pathname)
     }
 
     const handleChange = e => {
@@ -44,13 +45,20 @@ const ProductDetails = () => {
         }
     }
 
+    const toogleModal = () => {
+        history.push(location.pathname)
+    }
+
     return (
-        <div className="details_overlay">
-            {
+        <Modal>
+        <div onClick={toogleModal}  className="details_overlay">
+           
+        </div>
+        {
                 product.length ? (
                     product.map(item => {
                         return (
-                            <div key={product.id} className="product_details">
+                            <div key={item.id} className="product_details">
                                 <div className="product_details_img">
                                     <img src={item.prdImg} alt={item.prdName} />
                                 </div>
@@ -66,11 +74,11 @@ const ProductDetails = () => {
                                         </div>
                                         <span className="quan">{item.prdUnit}</span>
                                     </div>
-                                    <div>NGN {item.prdPrice}</div>
+                                    <h3>Price</h3>
+                                    <div className="product_details_price">NGN {item.prdPrice}</div>
 
                                     <div className="product_details_cta">
                                         <button onClick={addToCart} className="btn btn_large btn_light">Add to cart</button>
-                                        <button onClick={toggleCart} className="btn btn_large btn_light">Add to wishlist</button>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +90,7 @@ const ProductDetails = () => {
                     </div>
                 )
             }
-        </div>
+        </Modal>
     )
 }
 

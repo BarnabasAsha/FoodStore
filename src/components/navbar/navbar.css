@@ -37,6 +37,11 @@
   font-weight: 700;
 }
 
+.logout_cta {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
 .navbar_ctas li:nth-child(even) {
   margin: 0 15px;
 }
@@ -84,9 +89,10 @@
 
     .navbar_search input {
         width: 250px;
+        height: 40px;
     }
 
     .navbar_ctas li:nth-child(even) {
-        margin: 0 5px;
+        margin: 0 15px;
       }
 }

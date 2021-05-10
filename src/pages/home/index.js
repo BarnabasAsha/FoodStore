@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { productAction } from '../../actions/product'
 import Product from '../../components/product'
-import tomatoes from '../../assets/images/tomatoes.jpg'
-import pepper from '../../assets/images/ballpepper.jpg'
-import onions from '../../assets/images/onions.jpg'
-import garlic from '../../assets/images/garlic.jpg'
-
 import './home.css'
 
 const Home = () => {
+    const { groceriesSnapshot, farmSnapshot } = useSelector( state => state.product )
+    const dispatch = useDispatch()
+
+    const fetchProducts = async () => {
+        await dispatch(productAction.fetchGroceriesSnapshot())
+        await dispatch(productAction.fetchFarmSnapshot())
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+    
     return (
         <section className="home">
             <section className="home_hero">
@@ -20,10 +29,13 @@ const Home = () => {
             <section className="home_section">
                 <h2 className="second-level-heading">FRESH FROM THE FARM</h2>
                 <div className="section_grid">
-                    <Product name="Red Tomatoes" img={tomatoes} price="1000" unit="kg" />
-                    <Product name="Onions" img={onions} price="1000" unit="kg" />
-                    <Product name="Garlic" img={garlic} price="1000" unit="kg" />
-                    <Product name="Ball Pepper" img={pepper} price="1000" unit="kg" />
+                    {
+                        farmSnapshot ? (
+                            farmSnapshot.map( snapshot => 
+                                <Product key={snapshot.id} name={snapshot.prdName} img={snapshot.prdImg} price={snapshot.prdPrice} unit={snapshot.prdUnit} id={snapshot.id} />
+                            )
+                        ) : null
+                    }
                 </div>
                 <a href="/farm" className="btn btn_large btn_light">View more</a>
             </section>
@@ -31,10 +43,13 @@ const Home = () => {
             <section className="home_section">
                 <h2 className="second-level-heading">GROCERIES YOU LOVE</h2>
                 <div className="section_grid">
-                    <Product name="Red Tomatoes" img={tomatoes} price="1000" unit="kg" />
-                    <Product name="Onions" img={onions} price="1000" unit="kg" />
-                    <Product name="Garlic" img={garlic} price="1000" unit="kg" />
-                    <Product name="Ball Pepper" img={pepper} price="1000" unit="kg" />
+                {
+                       groceriesSnapshot ? (
+                        groceriesSnapshot.map( snapshot => 
+                            <Product key={snapshot.id} name={snapshot.prdName} img={snapshot.prdImg} price={snapshot.prdPrice} unit={snapshot.prdUnit} id={snapshot.id} />
+                        )
+                       ) : null
+                    }
                 </div>
                 <a href="/groceries" className="btn btn_large btn_light">View more</a>
             </section>

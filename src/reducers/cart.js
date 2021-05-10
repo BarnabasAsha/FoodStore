@@ -23,7 +23,7 @@ export default function cart(state = initialState, action) {
       case "ADD_TO_CART":
         return {
             ...state,
-            cartItems: handleAddToCart(state.cartItems, action.payload)
+            cartItems: [...handleAddToCart(state.cartItems, action.payload)]
         };
       case "REMOVE_FROM_CART":
         const filtered =  state.cartItems.filter((item) => item.id !== action.payload)

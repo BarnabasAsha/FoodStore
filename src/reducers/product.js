@@ -3,34 +3,46 @@ const initialState = {
     groceries: [],
     farm: [],
     market: [],
-    singleProduct: []
+    singleProduct: [],
+    groceriesSnapshot: [],
+    farmSnapshot: []
 }
 
 export default function product (state = initialState, action) {
     switch(action.type) {
         case 'FETCH_GROCERIES' :
           return {
-              ...initialState,
+              ...state,
               groceries: action.payload
           }
+        case 'FETCH_GROCERIES_SNAPSHOT' :
+            return {
+                ...state,
+                groceriesSnapshot: action.payload
+            }
         case 'FETCH_FARM' :
           return {
-              ...initialState,
+              ...state,
               farm: action.payload
           }
+          case 'FETCH_FARM_SNAPSHOT' :
+            return {
+                ...state,
+                farmSnapshot: action.payload
+            }
         case 'FETCH_MARKET' :
             return {
-                ...initialState,
+                ...state,
                 market: action.payload
             }
         case 'FETCHING' :
                 return {
-                    ...initialState,
+                    ...state,
                     loading: action.status
                 }
         case 'FETCH_SINGLE_PRODUCT':
             return {
-                ...initialState,
+                ...state,
                 singleProduct: action.payload
             }
           default :

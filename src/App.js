@@ -1,7 +1,7 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from './store'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { userAction } from './actions/user'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Layout from './layout/layout'
 import Home from './pages/home'
 import './App.css';
@@ -12,92 +12,121 @@ import ProductDetails from './pages/productDetails';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
 import Admin from './pages/admin'
+import { auth, handleUserProfile } from './firebase/utils'
+import useQuery from './customHooks/useQuery'
 
 function App() {
+  const dispatch = useDispatch()
+  const { currentUser } = useSelector(state => state.user)
+
+  const query = useQuery()
+  const id = query.get('product')
+  
+
+  useEffect(() => {
+    const authListener = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await handleUserProfile(userAuth)
+        userRef.onSnapshot((snapshot) => {
+          dispatch(userAction.setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
+          }, err => console.log(err.message)))
+        })
+      }
+      dispatch(userAction.setCurrentUser(userAuth))
+    })
+
+    return () => {
+      authListener()
+    }
+  }, [])
 
   return (
-    <Provider store={store}>
     <div className="App">
-      <Router>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return (
-                <Layout>
-                  <Home />
-                </Layout>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/groceries"
-            render={() => {
-              return (
-                <Layout>
-                  <Groceries />
-                </Layout>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/market"
-            render={() => {
-              return (
-                <Layout>
-                  <Market />
-                </Layout>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/product/:id"
-            render={() => {
-              return (
-                <Layout>
-                  <ProductDetails />
-                </Layout>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/farm"
-            render={() => {
-              return (
-                <Layout>
-                  <Farm />
-                </Layout>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/admin"
-            render={() => {
-              return (
-                <Layout>
-                  <Admin />
-                </Layout>
-              );
-            }}
-          />
-          <Route
-            path="/login"
-            component={Signin}
-          />
-          <Route
-            path="/signup"
-            component={Signup}
-          />
-        </Switch>
-      </Router>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return (
+              <Layout>
+                <Home />
+              </Layout>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/groceries"
+          render={() => {
+            return (
+              <Layout>
+                <Groceries />
+              </Layout>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/market"
+          render={() => {
+            return (
+              <Layout>
+                <Market />
+              </Layout>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/product/:id"
+          render={() => {
+            return (
+              <Layout>
+                <ProductDetails />
+              </Layout>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/farm"
+          render={() => {
+            return (
+              <Layout>
+                <Farm />
+              </Layout>
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/admin"
+          render={() => {
+            return (
+              <Layout>
+                <Admin />
+              </Layout>
+            );
+          }}
+        />
+        <Route
+          path="/login"
+          render={() => currentUser ? <Redirect to="/"/> : <Signin />}
+        />
+
+        <Route
+          path="/signup"
+          render={() => currentUser ? <Redirect to="/"/> : <Signup />
+          }
+        />
+      </Switch>
+      {
+        
+        id ? <ProductDetails /> : null
+      }
     </div>
-    </Provider>
   );
 }
 

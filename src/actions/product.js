@@ -1,4 +1,4 @@
-import { fetchGroceries, fetchMarket, fetchFarm, fetchSingleProduct } from '../services/productService' 
+import { fetchGroceries, fetchMarket, fetchFarm, fetchSingleProduct, fetchFarmSnapshot, fetchGroceriesSnapshot } from '../services/productService' 
 
 export const productAction = {
     fetchGroceries: () => {
@@ -20,6 +20,30 @@ export const productAction = {
                     return doc.data()
                 })
                 console.log(prdArray)
+                dispatch(success(prdArray))
+            }, 
+            error => dispatch(failure(error)))
+        }
+    },
+    fetchGroceriesSnapshot: () => {
+        const success = (data) => {
+            return { type: 'FETCH_GROCERIES_SNAPSHOT', payload: data }
+        }
+        const failure = (err) => {
+            return { type: 'FETCH_GROCERIES_SNAPSHOT', error: err }
+        }
+        const request = () => {
+            return { type: 'FETCHING', status: true }
+        }
+
+        return dispatch => {
+            request()
+            fetchGroceriesSnapshot()
+            .then( snapshot => {
+                const prdArray = snapshot.docs.map( doc => {
+                    return doc.data()
+                })
+                console.log(prdArray, 'ddkfdjkddd')
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
@@ -63,6 +87,30 @@ export const productAction = {
         return dispatch => {
             request()
             fetchFarm()
+            .then( snapshot => {
+                const prdArray = snapshot.docs.map( doc => {
+                    return doc.data()
+                })
+                console.log(prdArray)
+                dispatch(success(prdArray))
+            }, 
+            error => dispatch(failure(error)))
+        }
+    },
+    fetchFarmSnapshot: () => {
+        const success = (data) => {
+            return { type: 'FETCH_FARM_SNAPSHOT', payload: data }
+        }
+        const failure = (err) => {
+            return { type: 'FETCH_FARM_SNAPSHOT', error: err }
+        }
+        const request = () => {
+            return { type: 'FETCHING', status: true }
+        }
+
+        return dispatch => {
+            request()
+            fetchFarmSnapshot()
             .then( snapshot => {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()

@@ -1,36 +1,45 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { selectCartItemsCount, selectCartTotal } from '../../reducers/cartCount'
+import { useHistory } from 'react-router-dom'
 import { cartAction } from '../../actions/cart'
-// import { selectCartItems } from '../../reducers/cartCount'
-// import { createStructuredSelector } from 'reselect'
 import './cart.css'
 import CartItem from '../cartItem'
 
 
 const Cart = () => {
-
+    const history = useHistory()
+    const currentUser = useSelector( state => state.user.currentUser)
     const dispatch = useDispatch()
-    // const mapState = createStructuredSelector({
-    //     cartItems: selectCartItems
-    // })
+    const getState = useSelector(state => state)
+    const mycartCount = selectCartItemsCount(getState)
+    const myCartTotal = selectCartTotal(getState)
+    
     const cartItems = useSelector( state => state.cart.cartItems)
     const toggleCart = () => {
         dispatch(cartAction.toggleCart())
+    }
+
+    const handleCheckout = () => {
+        if(currentUser) {
+            //show checkoutform
+        }
+        history.push('/login');
     }
 
     return (
         <div className="cart_overlay">
             <div className="cart">
                 <div className="cart_header">
-                    <h3 className="">2 Items</h3>
-                    <span><strong>NGN 0</strong></span>
+                    <h3>{mycartCount} Items</h3>
+                    <span><strong>NGN {myCartTotal}</strong></span>
                 </div>
                 <div className="cart_items_wrapper">
                     {
                         cartItems.length ? (
                             cartItems.map(item => {
                                 return (
-                                    <CartItem key={item.id} id={item.id} price={item.prdPrice} name={item.prdName} quantity={item.cartQuantity} img={item.prdImg} />
+                                    <CartItem key={item.id} {...item} />
 
                                 )
                             })
@@ -41,7 +50,7 @@ const Cart = () => {
                    <div className="cart_ctas"> <button onClick={toggleCart} className="btn btn_large btn_dark">Keep Shopping</button>
                   {
                       cartItems.length ? (
-                        <button className="btn btn_large btn_dark">Checkout</button>
+                        <button onClick={handleCheckout} className="btn btn_large btn_dark">Checkout</button>
                       ) : null
                   }
                   </div>

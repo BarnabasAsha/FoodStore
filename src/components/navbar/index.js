@@ -1,16 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCartItemsCount } from '../../reducers/cartCount'
+import { auth } from '../../firebase/utils'
 import { cartAction } from '../../actions/cart'
 import logo from '../../assets/images/foodstore_logo.png'
-import wishlist from '../../assets/images/wishlist_icon.svg'
 import cart from '../../assets/images/cart_icon.svg'
 
 import './navbar.css'
 
 const Navbar = () => {
+    const currentUser = useSelector(state => state.user.currentUser)
     const dispatch = useDispatch()
-    const getState = useSelector( state => state )
+    const getState = useSelector(state => state)
     const mycartCount = selectCartItemsCount(getState)
 
     const toggleCart = () => {
@@ -26,19 +27,19 @@ const Navbar = () => {
                 <input type="text" name="search" placeholder="Search for your foods and groceries" />
             </div>
             <ul className="navbar_ctas">
-                <li>
-                    <a className="btn btn_dark btn_large" href="/wishlist">
-                        <img className="navbar_icon" src={wishlist} alt="" />
-                            <span className="navbar_ctas_text">WISHLIST</span>
-                        </a>
-                </li>
                 <li onClick={toggleCart}>
                     <button className="btn btn_dark btn_large">
-                    <img className="navbar_icon adjust" src={cart} alt="" />
-                       <span className="navbar_ctas_text">CART ({mycartCount})</span> </button>
+                        <img className="navbar_icon adjust" src={cart} alt="" />
+                        <span className="navbar_ctas_text">CART ({mycartCount})</span> </button>
                 </li>
                 <li>
-                    <a href="/login">LOGIN</a>
+                    {
+                        !currentUser ? (
+                            <a href="/login">LOGIN</a>
+                        ) : (
+                            <button className="logout_cta" onClick={() => auth.signOut()}>LOGOUT</button>
+                        )
+                    }
                 </li>
             </ul>
         </nav>

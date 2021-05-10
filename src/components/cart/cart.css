@@ -28,17 +28,20 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1em;
+    font-weight: 500;
 }
 
 .cart_item_img {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
 }
 
 .cart_del {
     width: 40px;
     height: 40px;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 .cart_header {
@@ -57,5 +60,11 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
 }
