@@ -23,7 +23,7 @@ const Cart = () => {
 
     const config = {
         reference: (new Date()).getTime(),
-        email: currentUser.email,
+        email: currentUser.email ? currentUser.email : null,
         amount: Number(myCartTotal),
         publicKey: 'pk_test_679ff1fb37b6755e1c557bb93a9c3905336b3117',
     };
