@@ -19,7 +19,6 @@ export const productAction = {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()
                 })
-                console.log(prdArray)
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
@@ -43,7 +42,6 @@ export const productAction = {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()
                 })
-                console.log(prdArray, 'ddkfdjkddd')
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
@@ -67,7 +65,6 @@ export const productAction = {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()
                 })
-                console.log(prdArray)
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
@@ -91,7 +88,6 @@ export const productAction = {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()
                 })
-                console.log(prdArray)
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
@@ -115,7 +111,6 @@ export const productAction = {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()
                 })
-                console.log(prdArray)
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
@@ -139,7 +134,6 @@ export const productAction = {
                 const prdArray = snapshot.docs.map( doc => {
                     return doc.data()
                 })
-                console.log(prdArray)
                 dispatch(success(prdArray))
             }, 
             error => dispatch(failure(error)))
