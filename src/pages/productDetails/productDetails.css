@@ -36,7 +36,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 50px 70px; 
-    z-index: 20;
+    z-index: 2000;
 }
 
 .product_details_img {
@@ -114,13 +114,13 @@
 
 @media only screen and (max-width: 1023px) {
 
-    .details_overlay {
+    .modal {
         align-items: flex-end;
     }
 
     .product_details {
         width: 100%;
-        height: auto;
+        height: 500px;
         flex-direction: column;
         justify-content: flex-end;
         border-bottom-left-radius: 0;

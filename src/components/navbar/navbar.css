@@ -56,9 +56,6 @@
 }
 
 @media  only screen and (max-width: 1023px) {
-    .navbar {
-        position: relative;
-    }
 
   .navbar_search input {
       width: 300px;
@@ -78,7 +75,7 @@
         margin-bottom: 3em;
     } */
   
-    .navbar_search {
+    /* .navbar_search {
         position: absolute;
         top: 110px;
         left: 50%;
@@ -90,7 +87,7 @@
     .navbar_search input {
         width: 250px;
         height: 40px;
-    }
+    } */
 
     .navbar_ctas li:nth-child(even) {
         margin: 0 15px;
