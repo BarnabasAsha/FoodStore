@@ -10,6 +10,7 @@ const initialState = {
 
 const Signin = () => {
     const history = useHistory()
+    const [ errors, setErrors ] = useState([])
 
     const [userDetails, setUserDetails] = useState(initialState)
 
@@ -30,6 +31,7 @@ const Signin = () => {
             setUserDetails(initialState)
             history.push('/');
         } catch (e) {
+            setErrors([...errors, e.message])
             // console.log(e.message)
         }
     }
@@ -47,6 +49,13 @@ const Signin = () => {
                     <span className="signup_img"><img src={google} alt="" /></span>
                     Login with Google
                     </button>
+
+                    <ul className="signup_errors">
+                        {
+                            errors.length ? errors.map( err => <li>{err}</li>) : null
+                        }
+                    </ul>
+
                 <form onSubmit={handleSubmit}>
                     <div className="form_group">
                         <label htmlFor="email">Email Address</label>

@@ -59,3 +59,12 @@
     width: 30px;
     margin-right: 10px;
 }
+
+.signup_errors {
+    margin: 1em 0 0 0;
+}
+
+.signup_errors li {
+    font-size: 0.8rem;
+    color: red;
+}

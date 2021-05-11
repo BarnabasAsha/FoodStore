@@ -11,6 +11,7 @@ const initialState = {
 
 const Signup = () => {
     const history = useHistory()
+    const [ errors, setErrors ] = useState([])
     const [userDetails, setUserDetails] = useState(initialState)
 
     const handleChange = (e) => {
@@ -28,8 +29,9 @@ const Signup = () => {
             const { user } = await auth.createUserWithEmailAndPassword(userDetails.email, userDetails.password)
             await handleUserProfile(user, { ...userDetails.fullname })
             setUserDetails(initialState)
-            history.push('/login');
+            history.push('/');
         } catch (e) {
+            setErrors([...errors, e.message])
             // console.log(e.message)
         }
     }
@@ -38,7 +40,11 @@ const Signup = () => {
         <div className="signup_wrapper">
             <div className="signup">
                 <h2 className="second-level-heading">Create Account</h2>
-                
+                <ul className="signup_errors">
+                        {
+                            errors.length ? errors.map( err => <li>{err}</li>) : null
+                        }
+                    </ul>
                 <form onSubmit={handleSubmit}>
                     <div className="form_group">
                         <label htmlFor="fullname">Fullname</label>
