@@ -103,7 +103,7 @@ function App() {
         <Route
           exact
           path="/admin"
-          render={() => currentUser.userRoles.include('admin') ? (
+          render={() => currentUser && currentUser.userRoles.include('admin') ? (
                 <Layout>
                   <Admin />
                 </Layout>
