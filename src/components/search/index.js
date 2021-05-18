@@ -11,10 +11,12 @@ const initialState = {
 
 const Search = () => {
   const [searchState, updateSearchState] = useState(initialState);
+  const [formValue, updateFormValue] = useState('')
 
   const handleSearch = async (e) => {
+    updateFormValue(e.target.value)
     updateSearchState({ ...searchState, loading: true, status: true });
-    await searchProduct(e.target.value).then((result) => {
+    await searchProduct(formValue).then((result) => {
         if(!result) return
       const data = result.docs.map((obj) => obj.data());
       updateSearchState({ ...searchState, results: data, loading: false });
@@ -30,6 +32,7 @@ const Search = () => {
   return (
     <div className="navbar_search">
       <input
+        value={formValue}
         type="text"
         onChange={handleSearch}
         onBlur={resetSearch}

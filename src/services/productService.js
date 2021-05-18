@@ -25,8 +25,8 @@ export const fetchSingleProduct = async (id) => {
 }
 
 export const searchProduct = async (queryText) => {
-    if(queryText === '') return
-    else return firestore.collection('products').orderBy('prdName')
+    
+    return firestore.collection('products').orderBy('prdName')
     .startAt(queryText)
     .endAt(queryText + "\uf8ff")
     .get()
