@@ -23,3 +23,18 @@ export const fetchMarket = async () => {
 export const fetchSingleProduct = async (id) => {
     return await firestore.collection('products').where('id', '==', id).get()
 }
+
+export const searchProduct = async (queryText) => {
+    if(queryText === '') return
+    else return firestore.collection('products').orderBy('prdName')
+    .startAt(queryText)
+    .endAt(queryText + "\uf8ff")
+    .get()
+    // const db = firebase.firestore();
+    // return (await db.collection('users')
+    //   .where("company", "array-contains", companyId)
+    //   .orderBy('name')
+    //   .startAt(queryText)
+    //   .endAt(queryText + "\uf8ff")
+    //   .get());
+  }

@@ -7,6 +7,7 @@ import logo from '../../assets/images/foodstore_logo.png'
 import cart from '../../assets/images/cart_icon.svg'
 
 import './navbar.css'
+import Search from '../search'
 
 const Navbar = () => {
     const currentUser = useSelector(state => state.user.currentUser)
@@ -23,9 +24,7 @@ const Navbar = () => {
             <a href="/" className="navbar_logo">
                 <img src={logo} alt="Foodstore" />
             </a>
-            {/* <div className="navbar_search">
-                <input type="text" name="search" placeholder="Search for your foods and groceries" />
-            </div> */}
+            <Search />
             <ul className="navbar_ctas">
                 <li onClick={toggleCart}>
                     <button className="btn btn_dark btn_large">

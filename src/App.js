@@ -40,7 +40,7 @@ function App() {
     return () => {
       authListener()
     }
-  }, [dispatch])
+  }, [])
 
   return (
     <div className="App">
@@ -103,11 +103,11 @@ function App() {
         <Route
           exact
           path="/admin"
-          render={() => currentUser && currentUser.userRoles.include('admin') ? (
-                <Layout>
+          render={() => currentUser && currentUser.userRoles.includes('admin') ? (
+            <Layout>
                   <Admin />
                 </Layout>
-          ): <Redirect to="/"/> }
+          ): <Redirect to="/" />  }
         />
         <Route
           path="/login"
