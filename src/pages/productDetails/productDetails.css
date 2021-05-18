@@ -125,6 +125,7 @@
         justify-content: flex-end;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        overflow: hidden;
     }
 
     .product_details_img {
