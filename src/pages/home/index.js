@@ -28,6 +28,7 @@ const Home = () => {
 
             <section className="home_section">
                 <h2 className="second-level-heading">FRESH FROM THE FARM</h2>
+                <div className="section_grid_wrapper">
                 <div className="section_grid">
                     {
                         farmSnapshot ? (
@@ -36,6 +37,7 @@ const Home = () => {
                             )
                         ) : null
                     }
+                </div>
                 </div>
                 <a href="/farm" className="btn btn_large btn_light">View more</a>
             </section>

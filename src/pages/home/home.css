@@ -42,9 +42,10 @@
 .section_grid {
   padding: 2em;
   width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   /* gap: 50px !important;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); */

@@ -30,18 +30,6 @@
   border-radius: 20px;
 }
 
-.navbar_search input[type= "text"]:focus {
-  border: none;
-}
-
-.navbar_search input[type= "text"]:focus-visible {
-  border: none;
-}
-
-.navbar_search input[type= "text"]:active {
-  border: none;
-}
-
 .navbar_ctas {
   display: flex;
   justify-content: flex-start;

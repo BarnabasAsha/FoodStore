@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { productAction } from '../../actions/product'
 import Product from '../../components/product'
@@ -17,11 +18,15 @@ const Groceries = () => {
 
     return (
         <section>
+            <nav className="navigation">
+                <Link to="/">Home</Link> &gt; <Link className="navigation_active" to="/groceries">Groceries</Link>
+            </nav>
             <header className="section_heading">
                 <h1 className="first-level-heading">Groceries</h1>
             </header>
             <section>
             <h2 className="second-level-heading">GROCERIES YOU LOVE</h2>
+                <div className="section_grid_wrapper">
                 <div className="section_grid">
                     {
                         groceriesList.length ? (
@@ -34,6 +39,7 @@ const Groceries = () => {
                             <div>Loading...</div>
                         )
                     }
+                </div>
                 </div>
             </section>
         </section>
