@@ -22,7 +22,15 @@
 
 .cart_items_wrapper {
     margin-top: 2em;
+    height: 79vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;     
 }
+
+.cart_items_wrapper::-webkit-scrollbar {
+    display: none;
+  }
 
 .cart_item {
     display: flex;
